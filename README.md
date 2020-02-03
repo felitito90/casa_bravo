@@ -1,257 +1,122 @@
-<h1 align="center">
-    <a href="http://demos.krajee.com" title="Krajee Demos" target="_blank">
-        <img src="http://kartik-v.github.io/bootstrap-fileinput-samples/samples/krajee-logo-b.png" alt="Krajee Logo"/>
-    </a>
-    <br>
-    Yii 2 Practical-B Project Template
-    <hr>
-    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DTP3NZQ6G2AYU"
-       title="Donate via Paypal" target="_blank">
-        <img src="http://kartik-v.github.io/bootstrap-fileinput-samples/samples/donate.png" alt="Donate"/>
-    </a>
-</h1>
+# Casa Bravo
+Aplicación Casa-Bravo
 
-[![Latest Stable Version](https://poser.pugx.org/kartik-v/yii2-app-practical-b/v/stable.svg)](https://packagist.org/packages/kartik-v/yii2-app-practical-b) 
-[![License](https://poser.pugx.org/kartik-v/yii2-app-practical-b/license.svg)](https://packagist.org/packages/kartik-v/yii2-app-practical-b)
-[![Total Downloads](https://poser.pugx.org/kartik-v/yii2-app-practical-b/downloads.svg)](https://packagist.org/packages/kartik-v/yii2-app-practical-b) 
-[![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-app-practical-b/d/monthly.png)](https://packagist.org/packages/kartik-v/yii2-app-practical-b)
-[![Daily Downloads](https://poser.pugx.org/kartik-v/yii2-app-practical-b/d/daily.png)](https://packagist.org/packages/kartik-v/yii2-app-practical-b)
+Instalación
+-----------
 
-The Yii 2 Practical-B Application Template is a skeleton Yii 2 application based on the 
-[yii2-basic template](https://github.com/yiisoft/yii2-app-basic/) best for
-rapidly creating small projects. The template allows a **practical** method to directly 
-access the application from the app root.
+Para instalar se requiere clonar el proyecto.
 
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
+Al terminar de clonar el proyecto se debe de instalar el composer asset plugin que permite administrar dependencias de paquetes bower y npm a través de Composer. Sólo necesitas ejecutar este comando una vez; esto se hace con el comando `composer global require "fxp/composer-asset-plugin:^1.4.1"`
 
+Después se deben descargar las dependencias desde la consola con el comando `composer install`
 
-Why yii2-practical-b?
----------------------
-
-After installing a `app`, in the yii2-basic application you normally would access the
-frontend by:
-
-```
-http://domain/app/web
-```
-
-However, in many **practical** scenarios (especially on shared and single domain hosts) one 
-would want their users to directly access the app as:
-
-```
-http://domain/app
-```
-
-The `yii2-app-practical-b` enables you to achieve just that by carefully moving and rearranging the 
-bootstrap files and web components of frontend to work directly out of the app root. The 
-`web` folder is entirely eliminated and one can directly access the application frontend
-this way:
-
-```
-http://domain/app
-```
-
-All other aspects of the app configuration remain the same as the **yii2-basic** app. The original `assets` folder
-in the approot is renamed to `assets_b`, while the `web/assets` folder moves to app root.
-
-SOME KEY ADDITIONS
--------------------
-
-1. The template has some security preconfigured for users with Apache web servers. It has a default `.htaccess` security configuration setup.
-2. The template has prettyUrl enabled by default and the changes have been made to `.htaccess` as well as `urlManager`
-   component config in the config directory.
-
-DIRECTORY STRUCTURE
--------------------
-
-```
-    /                   contains the entry script and web resources
-    assets/             contains the web runtime assets
-    assets_b/           contains application assets such as JavaScript and CSS
-    commands/           contains console commands (controllers)
-    config/             contains application configurations
-    controllers/        contains Web controller classes
-    mail/               contains view files for e-mails
-    models/             contains model classes
-    runtime/            contains files generated during runtime
-    tests/              contains various tests for the yii2-practical-b application
-    vendor/             contains dependent 3rd-party packages
-    views/              contains view files for the Web application
-```
-
-REQUIREMENTS
-------------
-
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
-
-
-INSTALLATION
-------------
-
-### Install via Composer
-
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
-
-You can then install this project template using the following command:
-
-~~~
-php composer.phar global require "fxp/composer-asset-plugin:^1.3.1"
-php composer.phar create-project --prefer-dist --stability=dev kartik-v/yii2-app-practical-b practical-b
-~~~
-
-Now you should be able to access the application through the following URL, assuming `practical-b` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/practical-b
-~~~
-
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
-
-Set cookie validation key in `config/web.php` file to some random secret string:
-
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
-```
-
-You can then access the application through the following URL:
-
-~~~
-http://localhost/practical-b/
-~~~
-
-
-CONFIGURATION
+Configuración
 -------------
 
-### Database
+### Base de datos
 
-Edit the file `config/db.php` with real data, for example:
+- Crear una base de datos local
+
+### Valores locales
+
+- Crear una copia del archivo `config/example-web-local.php` y llamar `config/web-local.php` para editar los valores de configuración locales
+```
+cp example-web-local.php web-local.php
+```
+- Con los valores de configuración de la base de datos correr los migrates con el comando:
+```
+./yii migrate
+```
+- Verificar y editar otros archivos del directorio `config/` para personalizar los valores requeridos
+
+### SuperUser
+
+- Crear el usuario administrador desde la consola y confirmarlo, este es el usuario que tiene acceso al módulo de *Usuarios* y al *RBAC*.
+```
+./yii user/create correo@correo.com SuperAdmin *AdM1n$
+./yii user/confirm correo@correo.com
+```
+
+**NOTA:** Debido a las configuraciones del RBAC se dicta que obligatoriamente el usuario administrador del sistema deberá de ser llamado 'SuperAdmin', de lo contrario el usuario que se creó no podrá ingresar a todos los módulos del sistema.
+
+Diseño de vistas
+----------------
+
+### FlashAlert
+
+Ya está configurada en el layout el widget FlashAlert del tema para renderear los alerts con sólo definir la variable de sesión apropiada.
 
 ```php
-return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '1234',
-    'charset' => 'utf8',
-];
+Yii::$app->session->setFlash('error', 'Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.');
+Yii::$app->session->setFlash('success', 'Success alert preview. This alert is dismissable.');
+Yii::$app->session->setFlash('warning', 'Warning alert preview. This alert is dismissable.');
+Yii::$app->session->setFlash('info', 'Info alert preview. This alert is dismissable.');
 ```
 
-**NOTES:**
-- Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
-- Refer to the README in the `tests` directory for information specific to basic application tests.
+RBAC
+----
+Primero y antes que nada hay que leer y entender [Autenticación](https://www.yiiframework.com/doc/guide/2.0/es/security-authentication) y [Autorización](https://www.yiiframework.com/doc/guide/2.0/es/security-authorization) especialmente [Control de Acceso Basado en Roles (RBAC)](https://www.yiiframework.com/doc/guide/2.0/es/security-authorization#rbac) de la guía de Yii2.
 
-TESTING
--------
+#### Construir los datos de Autorización
+**TODO:** 
+Construir los datos de autorización implica las siguientes tareas:
 
-Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
-By default there are 3 test suites:
+- Definir roles y permisos;
+- Establecer relaciones entre roles y permisos;
+- Definir reglas;
+- Asociar reglas con roles y permisos;
+- Asignar roles a usuarios.
 
-- `unit`
-- `functional`
-- `acceptance`
+Esta guía en [Yii 2.0 Cookbook](https://yii2-cookbook.readthedocs.io/security-rbac/) explica cómo implementar y este [video](https://www.youtube.com/watch?v=vLb8YATO-HU) puede ser de buena referencia.
 
-Tests can be executed by running
+Referencias
+-----------
 
-```
-vendor/bin/codecept run
-``` 
-
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
-
-
-### Running  acceptance tests
-
-To execute acceptance tests do the following:  
-
-1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
-
-2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full featured
-   version of Codeception
-
-3. Update dependencies with Composer 
-
-    ```
-    composer update  
-    ```
-
-4. Download [Selenium Server](http://www.seleniumhq.org/download/) and launch it:
-
-    ```
-    java -jar ~/selenium-server-standalone-x.xx.x.jar
-    ```
-
-    In case of using Selenium Server 3.0 with Firefox browser since v48 or Google Chrome since v53 you must download [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and launch Selenium with it:
-
-    ```
-    # for Firefox
-    java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
-    
-    # for Google Chrome
-    java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
-    ``` 
-    
-    As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
-    
-    ```
-    docker run --net=host selenium/standalone-firefox:2.53.0
-    ```
-
-5. (Optional) Create `yii2_basic_tests` database and update it by applying migrations if you have them.
-
-   ```
-   tests/bin/yii migrate
-   ```
-
-   The database configuration can be found at `config/test_db.php`.
+- Se utiliza la extensión [2amigos/yii2-usuario](https://github.com/2amigos/yii2-usuario)
+- Guía de [2amigos/yii2-usuario](http://yii2-usuario.readthedocs.io/en/latest/)
+- Yii2 Lesson - 18 RBAC [part 1](https://www.youtube.com/watch?v=eFOIUeU-Y74) & [part 2](https://www.youtube.com/watch?v=G9-tBshv3Uo)
+- [Yii2 Framework - RBAC Tutorial with Example | Part 1](https://www.youtube.com/watch?v=7-jo8LKCnUk)
+- [Yii2 Framework RBAC Tutorial with Example | Part2 | Rule](https://www.youtube.com/watch?v=rzoQoB9N3v8)
 
 
-6. Start web server:
+## DYNAMIC FORM - ARREGLOS
 
-    ```
-    tests/bin/yii serve
-    ```
+**TODO:** Arreglar dynamic form utilizando vue-js
 
-7. Now you can run all available tests
+Éstos cambios se realizan en la carpeta de _'assets'_ correspondiente
+En dado caso de tener un error en el Dynamic, basarse en éste artículo para poder arreglarlo
+https://github.com/wbraganca/yii2-dynamicform/issues/104
 
-   ```
-   # run all available tests
-   vendor/bin/codecept run
-
-   # run acceptance tests
-   vendor/bin/codecept run acceptance
-
-   # run only unit and functional tests
-   vendor/bin/codecept run unit,functional
-   ```
-
-### Code coverage support
-
-By default, code coverage is disabled in `codeception.yml` configuration file, you should uncomment needed rows to be able
-to collect code coverage. You can run your tests and collect coverage with the following command:
+Error "toclone.clone is not a function":
 
 ```
-#collect coverage for all tests
-vendor/bin/codecept run -- --coverage-html --coverage-xml
-
-#collect coverage only for unit tests
-vendor/bin/codecept run unit -- --coverage-html --coverage-xml
-
-#collect coverage for unit and functional tests
-vendor/bin/codecept run functional,unit -- --coverage-html --coverage-xml
+    $toclone = $(widgetOptions.template);
 ```
 
-You can see code coverage output under the `tests/_output` directory.
+Corrije el error de ActiveFormData
+```JS
+if (typeof yiiActiveFormData !== "undefined" && typeof yiiActiveFormData.settings !== "undefined" ) {
+    $template.find('.' + yiiActiveFormData.settings.errorCssClass).removeClass(yiiActiveFormData.settings.errorCssClass);
+    if(typeof yiiActiveFormData.settings.errorCssClass !== "undefined" && yiiActiveFormData.settings.errorCssClass.length > 0) {
+    $template.find('.' + yiiActiveFormData.settings.successCssClass).removeClass(yiiActiveFormData.settings.successCssClass);
+        $template.find('.' + yiiActiveFormData.settings.errorCssClass).removeClass(yiiActiveFormData.settings.errorCssClass);
+    }
+
+    if(typeof yiiActiveFormData.settings.successCssClass !== "undefined" && yiiActiveFormData.settings.successCssClass.length > 0) {
+        $template.find('.' + yiiActiveFormData.settings.successCssClass).removeClass(yiiActiveFormData.settings.successCssClass);
+    }
+}
+```
+
+## Arreglando código (PSR2-3)
+
+Podemos utilizar el plug-in phpcs:
+
+```bash
+phpcs -p --extensions=php,js --colors --ignore=*/vendor/*,*assets/*,*/runtime/*,*/tests/* ./
+```
+
+Y para arreglar el código:
+```bash
+phpcbf -p --extensions=php,js --colors --ignore=*/vendor/*,*assets/*,*/runtime/*,*/tests/* ./
+```

@@ -61,7 +61,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if (\Yii::$app->user->isGuest === false) {
+            return $this->render('index');
+        }
+
+        return $this->redirect(['user/login']);
     }
 
     /**
@@ -109,9 +113,12 @@ class SiteController extends Controller
 
             return $this->refresh();
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
+        return $this->render(
+            'contact',
+            [
+                'model' => $model,
+            ]
+        );
     }
 
     /**
@@ -122,5 +129,16 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    
+    /**
+     * [actionSettings description]
+     * @return  mixed  [return settings module]
+     */
+    public function actionSettings()
+    {
+        $this->layout = 'settings';
+
+        return $this->render('settings');
     }
 }
