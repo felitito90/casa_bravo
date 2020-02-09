@@ -27,7 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'item_name',
             'price',
             'description:ntext',
-            'item_photo:ntext',
+            [
+                'attribute' => 'item_photo',
+                'value' => function ($model) {
+                    return Html::img($model->itemPhoto, ['width' => '100']);
+                },
+                'format' => 'html'
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -95,7 +95,7 @@ class MenuItemsController extends Controller
     {
         $model = $this->findModel($id);
         $oldFile = $model->getImageFile();
-        $oldFileName = $model->photo_file;
+        $oldFileName = $model->item_photo;
 
         if ($model->load(Yii::$app->request->post())) {
             // process uploaded image file instance
@@ -103,7 +103,7 @@ class MenuItemsController extends Controller
 
             // revert back if no valid file instance uploaded
             if (!$image) {
-                $model->photo_file = $oldFileName;
+                $model->item_photo = $oldFileName;
             }
 
             // upload only if valid uploaded file instance found

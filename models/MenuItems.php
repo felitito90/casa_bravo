@@ -160,4 +160,11 @@ class MenuItems extends \yii\db\ActiveRecord
         return true;
     }
 
+    /**
+     * @return string
+     */
+    public function getItemPhoto()
+    {
+        return Yii::getAlias('@imgMenu') . '/' . $this->item_photo;
+    }
 }
