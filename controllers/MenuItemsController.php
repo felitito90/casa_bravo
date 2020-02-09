@@ -66,8 +66,17 @@ class MenuItemsController extends Controller
     {
         $model = new MenuItems();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $image = $model->uploadImage();
+
+            if ($image !== false) {
+                $path = $model->getImageFile();
+                $image->saveAs($path);
+            }
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
@@ -85,9 +94,31 @@ class MenuItemsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $oldFile = $model->getImageFile();
+        $oldFileName = $model->photo_file;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            // process uploaded image file instance
+            $image = $model->uploadImage();
+
+            // revert back if no valid file instance uploaded
+            if (!$image) {
+                $model->photo_file = $oldFileName;
+            }
+
+            // upload only if valid uploaded file instance found
+            if ($image !== false) { // delete old and overwrite
+                if (is_file($oldFile)) {
+                    unlink($oldFile);
+                }
+
+                $path = $model->getImageFile();
+                $image->saveAs($path);
+            }
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [

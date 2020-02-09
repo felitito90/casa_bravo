@@ -8,8 +8,13 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets_b\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
+// asegura que el usuario aun tenga su sesión abierta
+if (empty(Yii::$app->user) || Yii::$app->user->isGuest == true) {
+    return Yii::$app->response->redirect(Url::to(['site/index']));
+}
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

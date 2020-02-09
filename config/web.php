@@ -11,11 +11,11 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
-        '@logos' => '../images/logos'
+        '@logos' => '../images/logos',
         //'@imgDocs' => '../images/doctors',
         //'@docsUsg' => '../documents/usg',
         //'@docsLabs' => '../documents/labs',
-        //'@imgRecords' => '../images/medical-records',
+        '@imgMenu' => '../images/menu-items',
         //'@docsGstaff' => '../documents/generalstaff'
     ],
     'language' => 'es-MX',

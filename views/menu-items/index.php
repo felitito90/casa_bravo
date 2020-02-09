@@ -7,18 +7,16 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\MenuItemsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Menu Items');
+$this->title = Yii::t('app', 'Platillos/Bebidas');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-items-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Menu Items'), ['create'], ['class' => 'btn btn-success']) ?>
+    <p class="btn-group">
+        <?= Html::a(Yii::t('app', 'Nuevo'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -26,14 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'item_name',
             'price',
             'description:ntext',
             'item_photo:ntext',
-            //'active',
-            //'created_at',
-            //'created_by',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
