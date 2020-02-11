@@ -1,29 +1,72 @@
 #!/usr/bin/env php
 <?php
-/**
- * Yii console bootstrap file.
+
+/*
+ * --------------------------------------------------------------------------
+ * Register auto loaders
+ * --------------------------------------------------------------------------
  *
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
+ * Add registered class loaders required for our application.
+ *
  */
 
-defined('YII_DEBUG') or define('YII_DEBUG', true);
-defined('YII_ENV') or define('YII_ENV', 'test');
+require(__DIR__ . '/../../bootstrap/autoload.php');
 
-require(__DIR__ . '/../../vendor/autoload.php');
-require(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
+/*
+ * --------------------------------------------------------------------------
+ * Initialize SideKit library
+ * --------------------------------------------------------------------------
+ *
+ * This step is required *prior* adding the application script.
+ *
+ */
 
-$config = yii\helpers\ArrayHelper::merge(
-    require(__DIR__ . '/../../config/console.php'),
-    [
-        'components' => [
-            'db' => require(__DIR__ . '/../../config/test_db.php')
-        ]
+require(__DIR__ . '/../../bootstrap/sidekit.php');
+
+/*
+ * --------------------------------------------------------------------------
+ * Initialize custom aliases
+ * --------------------------------------------------------------------------
+ *
+ * Add custom aliases to the application. Added after sidekit to take
+ * advantage of its loaded configuration values
+ */
+
+require(__DIR__ . '/../../bootstrap/aliases.php');
+
+
+use SideKit\Config\ConfigKit;
+use yii\helpers\ArrayHelper;
+use yii\console\Application;
+
+/*
+ * --------------------------------------------------------------------------
+ * Configure and Go!
+ * --------------------------------------------------------------------------
+ *
+ * Bootstrap the configuration processes and get and Application ready to use.
+ * Applying configuration details in a different file allow us to free up
+ * unnecessary code on the entry script.
+ */
+
+$config = ConfigKit::config()->build('console', ConfigKit::env()->get('CONFIG_USE_CACHE'));
+
+/*
+ * --------------------------------------------------------------------------
+ * Override database
+ * --------------------------------------------------------------------------
+ *
+ * Override database configuration so we can use the test database instead.
+ */
+
+$config = ArrayHelper::merge($config, [
+    'components' => [
+        'db' => require(__DIR__ . '/../../config/test/components/db.php')
     ]
-);
+]);
 
+$app = new Application($config);
 
-$application = new yii\console\Application($config);
-$exitCode = $application->run();
+$exitCode = $app->run();
+
 exit($exitCode);

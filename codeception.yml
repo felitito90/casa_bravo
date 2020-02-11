@@ -8,10 +8,11 @@ settings:
     bootstrap: _bootstrap.php
     memory_limit: 1024M
     colors: true
+    log: true
 modules:
     config:
         Yii2:
-            configFile: 'config/test.php'
+            configFile: 'config/codeception/app.php'
             cleanup: false
 
 # To enable code coverage:
@@ -19,7 +20,7 @@ modules:
 #    #c3_url: http://localhost:8080/index-test.php/
 #    enabled: true
 #    #remote: true
-#    #remote_config: '../codeception.yml'
+#    #remote_config: '../tests/codeception.yml'
 #    whitelist:
 #        include:
 #            - models/*
