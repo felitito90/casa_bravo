@@ -8,5 +8,9 @@ use SideKit\Config\ConfigKit;
  *
  * As we have changed the structure. Modify default Yii aliases here.
  */
-Yii::setAlias('@web', ConfigKit::config()->getBasePath() . DIRECTORY_SEPARATOR . '../public');
 Yii::setAlias('@admin', ConfigKit::config()->getBasePath() . DIRECTORY_SEPARATOR . '../admin');
+Yii::setAlias('@web', ConfigKit::config()->getBasePath() . DIRECTORY_SEPARATOR . '../public');
+Yii::setAlias('@domainName', (YII_ENV === 'dev') ? '/casa_bravo/public' : 'https://www.casa-bravo.mx');
+//Yii::setAlias('@domainName', (YII_ENV === 'dev') ? '/neotrip/website' : 'https://www.website.casa-bravo.mx');
+
+//Yii::setAlias('@website', ConfigKit::config()->getBasePath() . DIRECTORY_SEPARATOR . '../website');

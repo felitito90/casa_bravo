@@ -83,27 +83,24 @@ class MenuItems extends \yii\db\ActiveRecord
         ];
     }
 
-        /**
-     * fetch stored image file name with complete path
+    /**
      * @return string
      */
     public function getImageFile()
     {
-        Yii::$app->params['uploadPath'] = Yii::$app->basePath;
-        return isset($this->item_photo) ? Yii::$app->params['uploadPath'] . '/images/menu-items/' . $this->item_photo : null;
+        $uploadPath = Yii::getAlias('@website/img/menu_items');
+
+        return isset($this->public_photo) ? $uploadPath . DIRECTORY_SEPARATOR . $this->public_photo : null;
     }
 
     /**
-     * fetch stored image url
-     * @return string
+     * @return \yii\db\ActiveQuery
      */
-    public function getImageUrl()
+    public function getPublicphoto()
     {
-        // return a default image placeholder if your source avatar is not found
-        Yii::$app->params['uploadUrl'] = Yii::$app->urlManager->baseUrl;
-        $image = isset($this->item_photo) ? $this->item_photo : 'default_user.jpg';
+        $uploadPath = Yii::getAlias('@domainName/img/menu_items');
 
-        return Yii::$app->params['uploadUrl'] . Yii::getAlias('@imgMenu/') . $image;
+        return isset($this->public_photo) ? $uploadPath . DIRECTORY_SEPARATOR . $this->public_photo : null;
     }
 
     /**
