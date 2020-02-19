@@ -88,7 +88,7 @@ class MenuItems extends \yii\db\ActiveRecord
      */
     public function getImageFile()
     {
-        $uploadPath = Yii::getAlias('@web/img/menu_items');
+        $uploadPath = Yii::getAlias('@domainName/img/menu_items');
 
         return isset($this->item_photo) ? $uploadPath . DIRECTORY_SEPARATOR . $this->item_photo : null;
     }

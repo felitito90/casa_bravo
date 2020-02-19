@@ -69,13 +69,14 @@ class MenuItemsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $image = $model->uploadImage();
 
+            $model->save(false);
+
             if ($image !== false) {
                 $path = $model->getImageFile();
-                var_dump($path);die();
                 $image->saveAs($path);
             }
-
-            if ($model->save()) {
+            
+        if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
