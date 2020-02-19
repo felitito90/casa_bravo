@@ -71,6 +71,7 @@ class MenuItemsController extends Controller
 
             if ($image !== false) {
                 $path = $model->getImageFile();
+                var_dump($path);die();
                 $image->saveAs($path);
             }
 

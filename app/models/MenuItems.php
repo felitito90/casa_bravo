@@ -88,9 +88,9 @@ class MenuItems extends \yii\db\ActiveRecord
      */
     public function getImageFile()
     {
-        $uploadPath = Yii::getAlias('@website/img/menu_items');
+        $uploadPath = Yii::getAlias('@web/img/menu_items');
 
-        return isset($this->public_photo) ? $uploadPath . DIRECTORY_SEPARATOR . $this->public_photo : null;
+        return isset($this->item_photo) ? $uploadPath . DIRECTORY_SEPARATOR . $this->item_photo : null;
     }
 
     /**
@@ -100,7 +100,7 @@ class MenuItems extends \yii\db\ActiveRecord
     {
         $uploadPath = Yii::getAlias('@domainName/img/menu_items');
 
-        return isset($this->public_photo) ? $uploadPath . DIRECTORY_SEPARATOR . $this->public_photo : null;
+        return isset($this->item_photo) ? $uploadPath . DIRECTORY_SEPARATOR . $this->item_photo : null;
     }
 
     /**
@@ -162,6 +162,6 @@ class MenuItems extends \yii\db\ActiveRecord
      */
     public function getItemPhoto()
     {
-        return Yii::getAlias('@imgMenu') . '/' . $this->item_photo;
+        return Yii::getAlias('@web') . '/img/menu_items/' . $this->item_photo;
     }
 }
