@@ -29,13 +29,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'item_name',
             'price',
             'description:ntext',
-            'item_photo:ntext',
-            'active',
-            'created_at',
+            [
+                'attribute' => 'item_photo',
+                'value' => function ($model) {
+                    return Html::img($model->publicPhoto);
+                },
+                'format' => 'html'
+            ],
+            'active:boolean',
+            'created_at:datetime',
             'created_by',
         ],
     ]) ?>
