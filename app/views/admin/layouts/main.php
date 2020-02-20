@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'Casa Bravo',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -49,6 +49,7 @@ AppAsset::register($this);
                 . '<span class="caret"></span>'
                 . '</a>'
                 . '<ul class="dropdown-menu">'
+                . '<li><a href="' . Url::to(['/menu-items/index']) . '">Platillos y Bebidas</a></li>'
                 . '<li><a href="/user/admin">Manage Users</a></li>'
                 . '<li><a href="' . Url::to(['/user/logout']) . '" data-method="post">Logout</a></li>'
                 . '<li>'

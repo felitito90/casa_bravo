@@ -13,7 +13,7 @@ class m200203_021911_crear_tabla_sales extends Migration
     public function safeUp()
     {
 
-        $this->execute(file_get_contents(Yii::getAlias('migrations/sql/m200203_021911.sql')));
+        $this->execute(file_get_contents(Yii::getAlias('@app/migrations/sql/m200203_021911.sql')));
 
     }
 

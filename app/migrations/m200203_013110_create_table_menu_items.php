@@ -12,7 +12,7 @@ class m200203_013110_create_table_menu_items extends Migration
      */
     public function safeUp()
     {
-        $this->execute(file_get_contents(Yii::getAlias('migrations/sql/m200203_013110.sql')));
+        $this->execute(file_get_contents(Yii::getAlias('@app/migrations/sql/m200203_013110.sql')));
     }
 
     /**
