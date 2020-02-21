@@ -70,9 +70,12 @@ class MenuItemsController extends Controller
             $image = $model->uploadImage();
 
             $model->save(false);
+            Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/../public/img/menu_items/';
+
+            $path = Yii::$app->params['uploadPath'] . $model->item_photo;
 
             if ($image !== false) {
-                $path = $model->getImageFile();
+                //$path = $model->getImageFile();
                 $image->saveAs($path);
             }
             
