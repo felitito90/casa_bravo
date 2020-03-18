@@ -25,6 +25,7 @@ class BurgerAsset extends AssetBundle
     ];
 
     public $js = [
+        'js/vendor/jquery-1.12.4.min.js',
         'js/vendor/modernizr-3.5.0.min.js',
         'js/popper.min.js',
         'js/bootstrap.min.js',
