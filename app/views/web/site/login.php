@@ -9,39 +9,77 @@ use yii\helpers\Html;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
+
+$fieldOptions1 = [
+    'template' =>  '<div class="input-group"><span class="input-group-addon"><i class="fa fa-user" style="color: black;"></i></span>{input}</div>'
+];
+
+$fieldOptions2 = [
+    'template' =>  '<div class="input-group"><span class="input-group-addon"><i class="fa fa-key mx-auto" style="color: black;"></i></span>{input}</div>'
+];
+
+$fieldOptions3 = [
+    'template' => '<div class="checkbox-nice">{input}</div><label for="remember-me">Remember me</label>'
+];
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="row">
+    <div class="col-12 col-sm-12">
+        <div id="login-box">
+            <div id="login-box-holder">
+                <div class="row">
+                    <div class="col-12 col-sm-12">
+                        <header id="login-header">
+                            <div id="login-logo">
+                                <img src="<?= Yii::getAlias('@web') ?>/img/casa-bravo.png"/>
+                            </div>
+                        </header>
+                        <div id="login-box-inner">
+                            <?php $form = ActiveForm::begin([
+                                'id' => 'login-form',
+                                'layout' => 'horizontal',
+                                'fieldConfig' => [
+                                    'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
+                                    'labelOptions' => ['class' => 'col-lg-1 control-label'],
+                                ],
+                            ]); ?>
 
-    <p>Please fill out the following fields to login:</p>
+                            <?= $form->field($model, 'email', $fieldOptions1)->textInput([
+                                'autofocus' => true,
+                                'placeholder' => Yii::t('app', 'Correo electrónico')
+                            ]) ?>
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'layout' => 'horizontal',
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
-    ]); ?>
+                            <?= $form->field($model, 'password', $fieldOptions2)->passwordInput([
+                                'placeholder' => Yii::t('app', 'Contraseña')
+                            ]) ?>
+                            
+                            <div class="checkbox-nice">
+                                <?= $form->field($model, 'rememberMe', $fieldOptions3)->checkbox([
+                                    'template' => "<div class=\"col-lg-3\">{input}{label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+                                ]) ?>                            
+                            </div>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                            <?= Html::submitButton(Yii::t('app', 'Ingresar'), ['class' => 'btn btn-default btn-block', 'tabindex' => '3']) ?>
+                            
+                            <div class="row">
+                                <?= Html::a(Yii::t('app', '¿Olvidó su contraseña?'), ['/site/request-password-reset'], [
+                                    'style' => 'font-size: 10px',
+                                    'class' => 'btn btn-outline-danger btn-block'
+                                    ]
+                                )?>
+                            </div>
+                            <div class="row">
+                                <?= Html::a(Yii::t('app', 'Registrarse'), ['/site/signup'], [
+                                    'style' => 'font-size: 10px',
+                                    'class' => 'btn btn-outline-primary btn-block'
+                                    ]
+                                )?>
+                            </div>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
-
-        <?= $form->field($model, 'rememberMe')->checkbox([
-            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ]) ?>
-
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                            <?php ActiveForm::end(); ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-    <?php ActiveForm::end(); ?>
-
-    <div class="col-lg-offset-1" style="color:#999;">
-        You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-        To modify the username/password, please check out the code <code>app\models\User::$users</code>.
     </div>
 </div>

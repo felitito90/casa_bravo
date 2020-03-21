@@ -1,10 +1,10 @@
 <?php
 namespace app\models\forms\web;
 
+use app\models\Customers;
+use app\models\CustomersAuth;
 use Yii;
 use yii\base\Model;
-use app\models\Travelers;
-use app\models\TravelersAuth;
 use SideKit\Config\ConfigKit;
 
 /**
@@ -18,10 +18,6 @@ class SignupWebForm extends Model
     public $password;
     public $password_confirm;
 
-    //referrer
-    public $origin;
-    public $id;
-    
     /**
      * @inheritdoc
      */
@@ -30,7 +26,6 @@ class SignupWebForm extends Model
         return [
             [['first_name', 'last_name'], 'required'],
             [['first_name', 'last_name'], 'string', 'max' => 100],
-            [['origin', 'id'], 'string'],
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
@@ -38,7 +33,7 @@ class SignupWebForm extends Model
             [
                 'email',
                 'unique',
-                'targetClass' => '\app\models\TravelersAuth',
+                'targetClass' => '\app\models\CustomersAuth',
                 'message' => Yii::t('app', 'Este correo ya ha sido registrado.')
             ],
 
@@ -78,7 +73,7 @@ class SignupWebForm extends Model
             return null;
         }
 
-        $user = new TravelersAuth();
+        $user = new CustomersAuth();
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
@@ -90,27 +85,25 @@ class SignupWebForm extends Model
             try {
                 $user->save(false);
 
-                $traveler = new Travelers();
-                $traveler->travelers_auth_id = $user->id;
-                $traveler->avatar = 'avatar_photo_' . rand(1, 10) . '.svg';
-                $traveler->setFolio();
-                $traveler->first_name = $this->first_name;
-                $traveler->last_name  = $this->last_name;
-                $traveler->sex        = 1;
-                $traveler->postcode   = '0';
+                $customers = new Customers();
+                $customers->customers_auth_id = $user->id;
+                $customers->setFolio();
+                $customers->first_name = $this->first_name;
+                $customers->last_name  = $this->last_name;
+                $customers->sex        = 1;
 
-                if ($traveler->validate()) {
-                    $traveler->save(false);
+                if ($customers->validate()) {
+                    $customers->save(false);
                     $transaction->commit();
 
                     return $user;  // ok
                 } else {
                     $transaction->rollBack();
 
-                    $errores = $traveler->errors;
+                    $errores = $customers->errors;
                     foreach ($errores as $error) {
-                        foreach ($error as $mensaje) {
-                            $this->addError('*', $mensaje);
+                        foreach ($error as $message) {
+                            $this->addError('*', $message);
                         }
                     }
                 }
@@ -121,8 +114,8 @@ class SignupWebForm extends Model
         } else {
             $errores = $user->errors;
             foreach ($errores as $error) {
-                foreach ($error as $mensaje) {
-                    $this->addError('*', $mensaje);
+                foreach ($error as $message) {
+                    $this->addError('*', $message);
                 }
             }
         }
@@ -140,7 +133,7 @@ class SignupWebForm extends Model
             return false;
         }
 
-        if (!TravelersAuth::isSecurityTokenValid($user->security_token)) {
+        if (!CustomersAuth::isSecurityTokenValid($user->security_token)) {
             $user->generateSecurityToken();
         }
 
@@ -150,17 +143,14 @@ class SignupWebForm extends Model
 
         $body = Yii::$app->view->renderFile('@app/views/mail/web/web-signup.php', [
             'user' => $user,
-            'origin' => $this->origin,
-            'id' => $this->id,
         ]);
 
-        return Yii::$app->sendMail->sendIn(
-            ConfigKit::env()->get('APP_SERVCLI_EMAIL'),
-            $this->email,
-            'Confirmar correo para ' . Yii::$app->name,
-            $body,
-            '',
-            2
-        );
+        $mailer = Yii::$app->mailer->compose()
+            ->setFrom(ConfigKit::env()->get('MAIL_FROM_ADDRESS'))
+            ->setTo($this->email)
+            ->setSubject('Confirmar correo para ' . Yii::$app->name)
+            ->setHtmlBody($body);
+
+        return $mailer->send();
     }
 }

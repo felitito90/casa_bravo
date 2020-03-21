@@ -2,6 +2,8 @@
 
 use SideKit\Config\ConfigKit;
 
+date_default_timezone_set('America/Cancun');
+
 return [
 
     /*
@@ -15,7 +17,9 @@ return [
      * the same name.
      */
 
-    'id' => 'web',
+    'id' => 'casa-bravo-public',
+
+    'name' => 'Casa Bravo',
 
     'basePath' => ConfigKit::config()->getBasePath(),
 

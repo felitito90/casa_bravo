@@ -1,5 +1,7 @@
 <?php
 
+use SideKit\Config\ConfigKit;
+
 return [
 
     /*
@@ -21,7 +23,15 @@ return [
      * false and configure a transport for the mailer to send real emails.
      */
 
-    'useFileTransport' => true,
+    'useFileTransport' => false,
+    'transport' => [
+        'class' => 'Swift_SmtpTransport',
+        'host' => ConfigKit::env()->get('MAIL_HOST'),
+        'username' => ConfigKit::env()->get('MAIL_USERNAME'),
+        'password' => ConfigKit::env()->get('MAIL_PASSWORD'),
+        'port' => ConfigKit::env()->get('MAIL_PORT'),
+        'encryption' => ConfigKit::env()->get('MAIL_ENCRIPTION'),
+    ],
 
     /*
      * --------------------------------------------------------------------------
@@ -32,5 +42,5 @@ return [
      * Defaults to '@app/mail', let's place its views where it supposed to be.
      */
 
-    'viewPath' => '@app/views/mail'
+    'viewPath' => '@app/views/mail',
 ];

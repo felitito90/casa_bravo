@@ -22,6 +22,7 @@ class BurgerAsset extends AssetBundle
         'css/animate.css',
         'css/slicknav.css',
         'css/style.css',
+        'css/custom.css',
     ];
 
     public $js = [

@@ -65,13 +65,12 @@ class ConfirmEmailRequestWebForm extends Model
             'id' => $this->id,
         ]);
 
-        return Yii::$app->sendMail->sendIn(
-            ConfigKit::env()->get('APP_SERVCLI_EMAIL'),
-            $this->email,
-            'Confirmar correo para ' . Yii::$app->name,
-            $body,
-            '',
-            2
-        );
+        $mailer = Yii::$app->mailer->compose()
+            ->setFrom(ConfigKit::env()->get('MAIL_FROM_ADDRESS'))
+            ->setTo($this->email)
+            ->setSubject('Confirmar correo para ' . Yii::$app->name)
+            ->setHtmlBody($body);
+        
+        return $mailer->send();
     }
 }
