@@ -1,5 +1,7 @@
 <?php
 
+use dosamigos\select2\Select2;
+use dosamigos\select2\Select2Bootstrap;
 use kartik\touchspin\TouchSpin;
 use kartik\widgets\FileInput;
 use yii\helpers\Html;
@@ -17,6 +19,21 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <div class="col-md-6 col-xs-6 col-sm-6">
             <?= $form->field($model, 'item_name')->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'type')->widget(Select2Bootstrap::class, [
+                'items' => [
+                    1 => Yii::t('app', 'Alimento'),
+                    2 => Yii::t('app', 'Bebida')
+                ],
+                'options' => [
+                    'placeholder' => Yii::t('app', 'Seleccione una opción'),
+                    'multiple' => false,
+                ],
+                'clientOptions' => [
+                    'width' => '100%',
+                    'allowClear' => true
+                ]
+            ]) ?>
             
             <?= $form->field($model, 'price')->widget(TouchSpin::classname(), [
                 'options' => ['placeholder' => Yii::t('app', 'Seleccionar precio')],

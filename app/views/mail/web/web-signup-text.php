@@ -13,7 +13,7 @@ if (preg_match('/dashboard/', $resetLink)) {
 }
 
 ?>
-Hola <?= $user->traveler->first_name ?>,
+Hola <?= $user->customer->first_name ?>,
 
 Siga el siguiente enlace para confirmar su correo:
 

@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @var app\models\Travelers    $user
  * @var \Da\User\Model\Token $token
  */
 ?>
@@ -182,7 +181,7 @@
                                                     <tr>
                                                         <td class="table-col-td" width="552" align="center" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                                                             <div style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; text-align: center;">
-                                                                <img src="http://neotrip.mx/img/logo.png" height="50" hspace="0" vspace="0" border="0">
+                                                                <img src="http://casa_bravo.mx/img/logo.png" height="50" hspace="0" vspace="0" border="0">
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -297,8 +296,8 @@
                                                             </table>
 
                                                             <div style="font-family: Arial, sans-serif; line-height: 36px; color: #444444; font-size: 13px;">
-                                                                <a href="https://www.facebook.com/NeotripMx/" style="color: #6688a6; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border-width: 1px 1px 2px; border-style: solid; border-color: #8aafce; padding: 6px 12px; font-size: 14px; line-height: 20px; background-color: #ffffff;">Facebook</a>
-                                                                <a href="https://www.instagram.com/neotripmx/" style="color: #b7837a; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border-width: 1px 1px 2px; border-style: solid; border-color: #FF5C88; padding: 6px 12px; font-size: 14px; line-height: 20px; background-color: #ffffff;">Instagram</a>
+                                                                <a href="https://www.facebook.com/casa_bravoMx/" style="color: #6688a6; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border-width: 1px 1px 2px; border-style: solid; border-color: #8aafce; padding: 6px 12px; font-size: 14px; line-height: 20px; background-color: #ffffff;">Facebook</a>
+                                                                <a href="https://www.instagram.com/casa_bravomx/" style="color: #b7837a; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border-width: 1px 1px 2px; border-style: solid; border-color: #FF5C88; padding: 6px 12px; font-size: 14px; line-height: 20px; background-color: #ffffff;">Instagram</a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -333,7 +332,7 @@
                                                     <tr>
                                                         <td class="table-col-td" width="528" style="font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal;" valign="top" align="left">
                                                             <div style="font-family: Arial, sans-serif; line-height: 19px; color: #777777; font-size: 14px; text-align: center;">
-                                                                &copy; <?= date('Y') ?> Neotrip.mx</div>
+                                                                &copy; <?= date('Y') ?> casa_bravo.mx</div>
                                                             <table class="table-space" height="12" style="height: 12px; font-size: 0px; line-height: 0; width: 528px; background-color: #ffffff;" width="528" bgcolor="#FFFFFF" cellspacing="0" cellpadding="0" border="0">
                                                                 <tbody>
                                                                     <tr>

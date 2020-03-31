@@ -26,6 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'item_name',
             'price',
+            [
+                'attribute' => 'type',
+                'value' => function ($model) {
+                    return $model->getType();
+                }
+            ],
             'description:ntext',
             [
                 'attribute' => 'item_photo',

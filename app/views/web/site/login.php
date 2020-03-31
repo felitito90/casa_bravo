@@ -42,6 +42,8 @@ $fieldOptions3 = [
                                     'labelOptions' => ['class' => 'col-lg-1 control-label'],
                                 ],
                             ]); ?>
+                            
+                            <?= $form->errorSummary($model, ['class' => 'alert alert-danger']); ?>
 
                             <?= $form->field($model, 'email', $fieldOptions1)->textInput([
                                 'autofocus' => true,

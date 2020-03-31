@@ -224,7 +224,7 @@ if (preg_match('/dashboard/', $resetLink)) {
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:18px; font-weight:bold; line-height:18px; color:#30373b;">
-                                            <?= Yii::t('app', '¡Hola') . ' ' . $user->traveler->first_name . '!' ?>
+                                            <?= Yii::t('app', '¡Hola') . ' ' . $user->customer->first_name . '!' ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -262,7 +262,7 @@ if (preg_match('/dashboard/', $resetLink)) {
                                     </tr>
                                     <tr>
                                         <td align="center">
-                                            <img src="https://www.neotrip.mx/img/logo.png" width="130" height="40" style="margin-top: 1.5rem" border="0" alt="Neotrip" />
+                                            <img src="https://www.casa_bravo.mx/img/logo.png" width="130" height="40" style="margin-top: 1.5rem" border="0" alt="casa_bravo" />
                                         </td>
                                     </tr>
                                 </table>
@@ -291,11 +291,11 @@ if (preg_match('/dashboard/', $resetLink)) {
                                 <table border="0" cellspacing="0" cellpadding="0" align="center">
                                     <tr>
                                         <td valign="top">
-                                            <a href="https://www.facebook.com/NeotripMx/" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/fb.png" width="26" height="26" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Fb" /></a>
+                                            <a href="https://www.facebook.com/casa_bravoMx/" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/fb.png" width="26" height="26" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Fb" /></a>
                                         </td>
                                         <td width="7">&nbsp;</td>
                                         <td valign="top">
-                                            <a href="https://www.instagram.com/neotripmx/" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/insta.png" width="26" height="26" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Instagram" /></a>
+                                            <a href="https://www.instagram.com/casa_bravomx/" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/insta.png" width="26" height="26" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Instagram" /></a>
                                         </td>
                                     </tr>
                                 </table>
@@ -306,8 +306,8 @@ if (preg_match('/dashboard/', $resetLink)) {
                         </tr>
                         <tr>
                             <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:12px; line-height:18px; color:#848789; text-transform:uppercase;">
-                                <span style="text-decoration:underline;"><a href="https://neotrip.mx/aviso-de-privacidad" target="_blank"
-                                    style="text-decoration:underline; color:#848789;"><?= Yii::t('app', 'Aviso de privacidad') ?></a></span> &nbsp;&nbsp;|&nbsp;&nbsp; <span style="text-decoration:underline;"><a href="https://neotrip.mx/terminos-y-condiciones"
+                                <span style="text-decoration:underline;"><a href="https://casa_bravo.mx/aviso-de-privacidad" target="_blank"
+                                    style="text-decoration:underline; color:#848789;"><?= Yii::t('app', 'Aviso de privacidad') ?></a></span> &nbsp;&nbsp;|&nbsp;&nbsp; <span style="text-decoration:underline;"><a href="https://casa_bravo.mx/terminos-y-condiciones"
                                     target="_blank" style="text-decoration:underline; color:#848789;"><?= Yii::t('app', 'Términos y condiciones') ?></a></span><span class="em_hide">
                         </td>
                     </tr>
@@ -317,7 +317,7 @@ if (preg_match('/dashboard/', $resetLink)) {
                     <tr>
                         <td align="center"
                             style="font-family:'Open Sans', Arial, sans-serif; font-size:12px; line-height:18px; color:#848789;text-transform:uppercase;">
-                            <?= date('Y') ?> NEOTRIP.MX <?= Yii::t('app', 'Derechos reservados') ?>
+                            <?= date('Y') ?> casa_bravo.MX <?= Yii::t('app', 'Derechos reservados') ?>
                         </td>
                     </tr>
                     <tr>
@@ -334,7 +334,7 @@ if (preg_match('/dashboard/', $resetLink)) {
                             <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:12px; line-height:18px; color:#848789;">
                                 <span style="text-decoration:underline;"><a href="#" target="_blank"
                                     style="text-decoration:underline; color:#848789;"><?= Yii::t('app', 'Teléfono') ?>: <i>+52 99 81 06 73 57</i></a></span> &nbsp;&nbsp;|&nbsp;&nbsp; <span style="text-decoration:underline;"><a href="#"
-                                    target="_blank" style="text-decoration:underline; color:#848789;"><?= Yii::t('app', 'Correo electrónico') ?>: <i>servicioalcliente@neotrip.mx</i></a></span><span class="em_hide">
+                                    target="_blank" style="text-decoration:underline; color:#848789;"><?= Yii::t('app', 'Correo electrónico') ?>: <i>servicioalcliente@casa_bravo.mx</i></a></span><span class="em_hide">
                         </td>
                     </tr>
                     <tr>

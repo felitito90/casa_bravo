@@ -38,9 +38,6 @@ class SiteController extends Controller
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
             ],
         ];
     }
@@ -68,12 +65,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if (!(Yii::$app->user->isGuest)) {
+            return $this->render('index');
+        } else {
+            $this->layout = 'login';
+            return $this->redirect(['site/login']);
+        }
     }
 
     /**
      * Login action.
-     *
      * @return string
      */
     public function actionLogin()
@@ -88,13 +89,12 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
-
         return $this->render('login', [
             'model' => $model,
         ]);
     }
 
-        /**
+    /**
      * Signs user up.
      * @return mixed
      */
@@ -178,10 +178,6 @@ class SiteController extends Controller
         $user->removeSecurityToken();
 
         if ($user->save(false)) {
-            if (ConfigKit::env()->get('YII_DEBUG') == 0) {
-                Yii::$app->mailRelay->setTravelerSubscriber($user->email, $user->traveler->fullName);
-            }
-
             $user->updateAttributes([
                 'last_login_at' => time(),
                 'last_login_ip' => Yii::$app->request->getUserIP()
@@ -190,7 +186,7 @@ class SiteController extends Controller
             Yii::$app->session->setFlash('success', [
                 'type' => 'success',
                 'message' => Yii::t('app', 'Correo confirmado correctamente.'),
-                'title' => Yii::t('app', 'Mensaje de NEOTRIP'),
+                'title' => Yii::t('app', 'Mensaje de casa_bravo'),
             ]);
 
             if (Yii::$app->user->login($user, 3600 * 24 * 30)) {

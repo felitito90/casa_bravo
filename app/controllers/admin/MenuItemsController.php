@@ -117,7 +117,13 @@ class MenuItemsController extends Controller
                     unlink($oldFile);
                 }
 
-                $path = $model->getImageFile();
+                Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/../public/img/menu_items/';
+
+                $path = Yii::$app->params['uploadPath'] . $model->item_photo;
+    
+    
+                //$path = $model->getImageFile();
+
                 $image->saveAs($path);
             }
 

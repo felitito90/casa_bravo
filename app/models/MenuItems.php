@@ -17,6 +17,7 @@ use yii\behaviors\BlameableBehavior;
  * @property float|null $price
  * @property string|null $description
  * @property string|null $item_photo
+ * @property int|null $type
  * @property int|null $active
  * @property string|null $created_at
  * @property int|null $created_by
@@ -39,7 +40,7 @@ class MenuItems extends \yii\db\ActiveRecord
         return [
             [['price'], 'number'],
             [['description', 'item_photo'], 'string'],
-            [['active', 'created_by'], 'integer'],
+            [['active', 'created_by', 'type'], 'integer'],
             [['created_at'], 'safe'],
             [['item_name'], 'string', 'max' => 255],
         ];
@@ -77,6 +78,7 @@ class MenuItems extends \yii\db\ActiveRecord
             'price' => Yii::t('app', 'Precio'),
             'description' => Yii::t('app', 'Descripción'),
             'item_photo' => Yii::t('app', 'Fotografía'),
+            'type' => Yii::t('app', 'Tipo'),
             'active' => Yii::t('app', 'Activo'),
             'created_at' => Yii::t('app', 'Creado el'),
             'created_by' => Yii::t('app', 'Creado por'),
@@ -163,5 +165,24 @@ class MenuItems extends \yii\db\ActiveRecord
     public function getItemPhoto()
     {
         return Yii::getAlias('@web') . '/img/menu_items/' . $this->item_photo;
+    }
+
+    /**
+     * Get the item type name
+     * @return  string
+     */
+    public function getType(): string
+    {
+        switch ($this->type) {
+            case 1:
+                return Yii::t('app', 'Alimento');
+                break;
+            case 2:
+                return Yii::t('app', 'Bebida');
+                break;
+            default:
+                return Yii::t('app', 'Sin definir');
+                break;
+        }
     }
 }

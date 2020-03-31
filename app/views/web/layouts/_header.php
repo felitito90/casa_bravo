@@ -1,7 +1,10 @@
-<?php 
+<?php
 
+use kartik\helpers\Html;
 use yii\helpers\Url;
+use app\models\helpers\ValueHelpers;
 
+$orderedProducts = ValueHelpers::getOrderedProductsQuantity();
 ?>
 <!-- header-start -->
 <header>
@@ -14,7 +17,16 @@ use yii\helpers\Url;
                             <nav>
                                 <ul id="navigation">
                                     <li><a class="active" href="<?= Url::to(['/site/index']) ?>">Inicio</a></li>
-                                    <li><a href="Menu.html">Menú</a></li>
+                                    <li><a href="<?= Url::to(['/menu-items/index']) ?>">Menú</a></li>
+                                    <li><a href="<?= Url::to(['/sale-items/index']) ?>">Productos ordenados <span class="badge badge-products" data-orderItems="orders"><?= $orderedProducts ?></span></a></li>
+                                    <?php if (!Yii::$app->user->isGuest) { ?>
+                                        <li>
+                                            <?= Html::a('Salir', Url::to(['/site/logout']), [
+                                                'data-method' => 'post',
+                                                'title' => Yii::t('app', 'Salir')
+                                            ]) ?>
+                                        </li>
+                                    <?php } ?>
                                 </ul>
                             </nav>
                         </div>

@@ -43,6 +43,8 @@ class MenuItemsSearch extends MenuItems
     {
         $query = MenuItems::find();
 
+        $query->where(['active' => 1]);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
