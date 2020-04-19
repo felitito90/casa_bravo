@@ -33,7 +33,7 @@ $orderedProducts = ValueHelpers::getOrderedProductsQuantity();
                     </div>
                     <div class="col-xl-2 col-lg-2">
                         <div class="logo-img">
-                            <a href="index.html">
+                            <a href="<?= Url::to(['/site/index']) ?>">
                                 <img src="img/casa-bravo.png" alt="" width="184" height="100">
                             </a>
                         </div>

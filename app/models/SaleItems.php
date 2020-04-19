@@ -50,4 +50,13 @@ class SaleItems extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Creado el'),
         ];
     }
+
+    /**
+     * [getMenuItem description]
+     * @return  [type]  [return description]
+     */
+    public function getMenuItem()
+    {
+        return $this->hasOne(MenuItems::class, ['id' => 'menu_item_id']);
+    }
 }

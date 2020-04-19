@@ -350,4 +350,12 @@ class CustomersAuth extends ActiveRecord implements IdentityInterface
         
         return date('d/m/Y h:i:s', $this->confirmed_at);
     }
+
+    /**
+     * [getAuths description]
+     * @return \Yii\db\ActiveQuery
+     */
+    public function getAuths() {
+        return $this->hasMany(Auth::className(), ['customer_auth_id' => 'id']);
+    }
 }

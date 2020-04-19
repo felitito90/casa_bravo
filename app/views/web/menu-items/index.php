@@ -9,7 +9,7 @@ $this->title = Yii::t('app', 'Menú');
 <!-- header-end -->
 
 <!-- bradcam_area_start -->
-<div class="bradcam_area breadcam_bg overlay">
+<div class="bradcam_area breadcam_bg overlay" style="background: url('<?= Yii::getAlias('@web') ?>/img/menu-items-banner.jpg'); no-repeat center center; background-size: cover;">
     <h3><?= Yii::t('app', 'Menú') ?></h3>
 </div>
 <!-- best_burgers_area_start  -->
@@ -45,7 +45,7 @@ $this->title = Yii::t('app', 'Menú');
                                 </div>
                                 <div class="buy d-flex justify-content-between align-items-center">
                                     <div class="price text-success">
-                                        <h5 class="mt-4">$<?= number_format(Html::encode($menuItem->price), 2, '.', ',') ?></h5>
+                                        <h5 class="mt-4">$<?= number_format(Html::encode($menuItem->price), 2, '.', ',') ?> (c/u)</h5>
                                     </div>
                                     <a href="javascript:void(0);" data-item="<?= $menuItem->id ?>" class="btn btn-outline-danger mt-3 buyItem"><i class="fa fa-shopping-cart"></i> Añadir</a>
                                 </div>
@@ -119,6 +119,10 @@ $this->title = Yii::t('app', 'Menú');
                 })
                 .then((data) => {
                     console.log(data);
+                    toastr.success(`
+                        Añadiendo ${quantity} a la lista de órdenes... <br>
+                        Para realizar su pedido puede pasar al menú "Productos ordenados"
+                    `);
                 });
         });
     });

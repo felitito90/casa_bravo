@@ -12,8 +12,7 @@
                                 Querétaro
                             </h3>
                             <p>Camino real de carretas 385 Milenio III<br>
-                                <a class="number" href="#">+52 442 241 9813</a>
-
+                                <a class="number" href="#">+52 442 241 9813</a></p>
                         </div>
                     </div>
                 </div>
@@ -36,11 +35,6 @@
                                         <i class="ti-facebook"></i>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-google-plus"></i>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -54,7 +48,7 @@
                     <div class="col-xl-12">
                         <p class="copy_right text-center">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<?= date('Y') ?> Todos los derechos reservados | Aplicación desarrollada <i class="fa fa-code" aria-hidden="true"></i> por <a href="#" target="_blank">Colorlib</a>
+                            Copyright &copy;<?= date('Y') ?> Todos los derechos reservados | Aplicación desarrollada <i class="fa fa-code" aria-hidden="true"></i> por <a href="#" target="_blank">Felipe Sánchez & Andrey Poot May</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>

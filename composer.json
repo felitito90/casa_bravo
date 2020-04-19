@@ -46,7 +46,9 @@
         "kartik-v/yii2-detail-view": "*",
         "kartik-v/yii2-date-range": "dev-master",
         "kartik-v/yii2-widget-depdrop": "dev-master",
-        "jino5577/yii2-date-range-picker": "*"
+        "jino5577/yii2-date-range-picker": "*",
+        "codemix/yii2-localeurls": "^1.4",
+        "yiisoft/yii2-authclient": "~2.1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

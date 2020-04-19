@@ -533,3 +533,8 @@
 .badge-inverse:hover {
     background-color: #1a1a1a;
 }
+
+.auth-clients-holder{
+    display: inline-block;
+    vertical-align: top;
+}

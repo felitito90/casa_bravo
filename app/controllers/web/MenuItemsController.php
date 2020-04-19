@@ -43,6 +43,19 @@ class MenuItemsController extends \yii\web\Controller
     public function actionOrder(int $menuItem, int $quantity)
     {
         if ($quantity > 0) {
+            $existingItem = SaleItems::findOne([
+                'customer_auth_id' => Yii::$app->user->identity->id,
+                'menu_item_id' => $menuItem,
+            ]);
+
+            if (!is_null($existingItem)) { // NOTE: If an item exist that would be updated
+                $existingItem->quantity = $quantity;
+
+                if ($existingItem->update()) {
+                    return json_encode(['saleItem' => (array) $existingItem]);
+                }
+            }
+
             $saleItem = new SaleItems();
             $saleItem->customer_auth_id = Yii::$app->user->identity->id;
             $saleItem->menu_item_id = $menuItem;

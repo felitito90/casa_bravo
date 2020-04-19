@@ -12,6 +12,7 @@ class BurgerAsset extends AssetBundle
     public $sourcePath = '@app/template/burger/';
     public $css = [
         // base css
+        'css/toastr.min.css',
         'css/bootstrap.min.css',
         'css/owl.carousel.min.css',
         'css/magnific-popup.css',
@@ -27,6 +28,7 @@ class BurgerAsset extends AssetBundle
     ];
 
     public $js = [
+        'js/toastr.min.js',
         'js/vendor/jquery-1.12.4.min.js',
         'js/vendor/modernizr-3.5.0.min.js',
         'js/popper.min.js',

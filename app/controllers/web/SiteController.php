@@ -9,6 +9,7 @@ use app\models\forms\web\PasswordResetRequestWebForm;
 use app\models\forms\web\ResetPasswordWebForm;
 use app\models\forms\web\SignupWebForm;
 use SideKit\Config\ConfigKit;
+use app\components\AuthHandler;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -54,6 +55,10 @@ class SiteController extends Controller
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+            ],
+            'auth' => [
+                'class' => 'yii\authclient\AuthAction',
+                'successCallback' => [$this, 'onAuthSuccess'],
             ],
         ];
     }
@@ -225,6 +230,15 @@ class SiteController extends Controller
         return $this->render('request', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * [onAuthSuccess description]
+     * @param   [type]  $client  [$client description]
+     * @return  [type]           [return description]
+     */
+    public function onAuthSuccess($client) {
+        (new AuthHandler($client))->handle();
     }
 
     /**

@@ -7647,11 +7647,11 @@ h6 {
 }
 
 .qtyInc:before {
-    content: "\4c"
+    content: "\2b"
 }
 
 .qtyDec:before {
-    content: "\4b"
+    content: "\2d"
 }
 
 .qtyTotal {
