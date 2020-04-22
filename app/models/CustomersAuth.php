@@ -85,8 +85,8 @@ class CustomersAuth extends ActiveRecord implements IdentityInterface
     }
 
     /**
-    * behaviors
-    */
+     * behaviors
+     */
     public function behaviors()
     {
         return [
@@ -135,7 +135,9 @@ class CustomersAuth extends ActiveRecord implements IdentityInterface
      */
     public function validateCurrentPassword()
     {
-        if (!$this->verifyPassword($this->currentPassword)) $this->addError('currentPassword', Yii::t('app', 'Contraseña actual incorrecta'));
+        if (!$this->verifyPassword($this->currentPassword)) {
+            $this->addError('currentPassword', Yii::t('app', 'Contraseña actual incorrecta'));
+        }
     }
 
     /**
@@ -198,59 +200,61 @@ class CustomersAuth extends ActiveRecord implements IdentityInterface
     }
 
     /**
-    * Finds user by security token
-    * @param string $token security token
-    * @return static|null
-    */
+     * Finds user by security token
+     * @param string $token security token
+     * @return static|null
+     */
     public static function findBySecurityToken($token)
     {
-        if (!static::isSecurityTokenValid($token)) return null;
+        if (!static::isSecurityTokenValid($token)) { 
+            return null;
+        }
 
         return static::findOne(['security_token' => $token]);
     }
 
     /**
-    * Finds out if security token is valid
-    * @param string $token security token
-    * @return boolean
-    */
+     * Finds out if security token is valid
+     * @param string $token security token
+     * @return boolean
+     */
     public static function isSecurityTokenValid($token)
     {
         if (empty($token)) return false;
-        
+
         // El token no expira.
         return true;
     }
 
     /**
-    * @getId
-    */
+     * @getId
+     */
     public function getId()
     {
         return $this->getPrimaryKey();
     }
 
     /**
-    * @getAuthKey
-    */
+     * @getAuthKey
+     */
     public function getAuthKey()
     {
         return $this->auth_key;
     }
 
     /**
-    * @validateAuthKey
-    */
+     * @validateAuthKey
+     */
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;
     }
 
     /**
-    * Validates password
-    * @param string $password password to validate
-    * @return boolean if password provided is valid for current user
-    */
+     * Validates password
+     * @param string $password password to validate
+     * @return boolean if password provided is valid for current user
+     */
     public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password_hash);
@@ -282,8 +286,8 @@ class CustomersAuth extends ActiveRecord implements IdentityInterface
     }
 
     /**
-    * Removes password reset token
-    */
+     * Removes password reset token
+     */
     public function removeSecurityToken()
     {
         $this->security_token = null;
@@ -326,7 +330,7 @@ class CustomersAuth extends ActiveRecord implements IdentityInterface
      * @return array the rowOptions for gridview
      */
     public function getRowCss()
-    {   
+    {
         $rowCss = [];
 
         if (!is_null($this->blocked_at)) {
@@ -341,13 +345,13 @@ class CustomersAuth extends ActiveRecord implements IdentityInterface
      */
     public function getConfirmedAt()
     {
-        if (is_null($this->confirmed_at)) { 
+        if (is_null($this->confirmed_at)) {
             return Html::tag('span', Yii::t('app', 'Sin confirmar'), [
                 'class' => 'badge',
                 'style' => 'background-color: #bb2124; color:white;'
             ]);
         }
-        
+
         return date('d/m/Y h:i:s', $this->confirmed_at);
     }
 
@@ -355,7 +359,8 @@ class CustomersAuth extends ActiveRecord implements IdentityInterface
      * [getAuths description]
      * @return \Yii\db\ActiveQuery
      */
-    public function getAuths() {
+    public function getAuths()
+    {
         return $this->hasMany(Auth::className(), ['customer_auth_id' => 'id']);
     }
 }
