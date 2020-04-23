@@ -7,18 +7,12 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\search\SalesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Sales');
+$this->title = Yii::t('app', 'Ordenes compradas');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sales-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Sales'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -30,13 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'order_folio',
             'status',
-            'active',
-            //'created_at',
-            //'created_by',
+            'active:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
-
 </div>

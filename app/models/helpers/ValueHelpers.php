@@ -45,4 +45,70 @@ class ValueHelpers
             
         return !is_null($total['total']) ? $total['total'] : 0;
     }
+
+    /**
+     * [getCustomersTotal description]
+     * @return  string
+     */
+    public static function getCustomersTotal(): string
+    {
+        $query = new Query();
+
+        $totalCustomers = $query->select('COUNT(*) as total')
+            ->from('customers_auth')
+            ->scalar();
+
+        return $totalCustomers;
+    }
+
+    /**
+     * [getFoodTotal description]
+     * @return  string  [return description]
+     */
+    public static function getFoodTotal(): string
+    {
+        $query = new Query();
+
+        $totalFood = $query->select('COUNT(*) as total')
+            ->from('menu_items')
+            ->where(['active' => 1, 'type' => 1])
+            ->scalar();
+
+        return $totalFood;
+    }
+
+    /**
+     * [getDrinkTotal description]
+     * @return  string  [return description]
+     */
+    public static function getDrinkTotal(): string
+    {
+        $query = new Query();
+
+        $totalDrinks = $query->select('COUNT(*) as total')
+            ->from('menu_items')
+            ->where([
+                'active' => 1,
+                'type' => 1
+            ])
+            ->scalar();
+
+        return $totalDrinks;
+    }
+
+    /**
+     * [getSalesTotal description]
+     * @return  string  [return description]
+     */
+    public static function getSalesTotal(): string
+    {
+        $query = new Query();
+
+        $totalSales = $query->select('COUNT(*) as total')
+            ->from('sales')
+            ->where(['active' => 1])
+            ->scalar();
+
+        return $totalSales;
+    }
 }

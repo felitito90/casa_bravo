@@ -31,7 +31,7 @@ class Sales extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'order_folio', 'status', 'active', 'created_at', 'created_by'], 'required'],
+            [['user_id', 'order_folio', 'status', 'active'], 'required'],
             [['user_id', 'status', 'active', 'created_by'], 'integer'],
             [['created_at'], 'safe'],
             [['order_folio'], 'string', 'max' => 16],
@@ -45,12 +45,21 @@ class Sales extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'order_folio' => Yii::t('app', 'Order Folio'),
-            'status' => Yii::t('app', 'Status'),
-            'active' => Yii::t('app', 'Active'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'created_by' => Yii::t('app', 'Created By'),
+            'user_id' => Yii::t('app', 'Cliente'),
+            'order_folio' => Yii::t('app', 'Folio de la orden'),
+            'status' => Yii::t('app', 'Estado'),
+            'active' => Yii::t('app', 'Activo'),
+            'created_at' => Yii::t('app', 'Creado el'),
+            'created_by' => Yii::t('app', 'Creado por'),
         ];
+    }
+
+    /**
+     * [getCustomer description]
+     * @return object the customer
+     */
+    public function getCustomer()
+    {
+        return $this->hasOne(CustomersAuth::class, ['user_id' => 'id']);
     }
 }

@@ -2,7 +2,9 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+use app\models\helpers\ValueHelpers;
+
+$this->title = Yii::t('app', 'Casa Bravo');
 ?>
 <div class="site-index">
 
@@ -17,35 +19,37 @@ $this->title = 'My Yii Application';
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+            <div class="col-md-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Clientes registrados</div>
+                    <div class="panel-body">
+                        <h4 class="text-center"><?= ValueHelpers::getCustomersTotal() ?></h4>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            <div class="col-md-3">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">Platillos</div>
+                    <div class="panel-body">
+                        <h4 class="text-center"><?= ValueHelpers::getFoodTotal() ?></h4>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+            <div class="col-md-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading">Bebidas</div>
+                    <div class="panel-body">
+                        <h4 class="text-center"><?= ValueHelpers::getDrinkTotal() ?></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">Ordenes realizadas</div>
+                    <div class="panel-body">
+                        <h4 class="text-center"><?= ValueHelpers::getSalesTotal() ?></h4>
+                    </div>
+                </div>
             </div>
         </div>
 

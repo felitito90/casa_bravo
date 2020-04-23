@@ -15,6 +15,7 @@ AppAsset::register($this);
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
+
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,61 +23,58 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+
 <body>
-<?php $this->beginBody() ?>
+    <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'Casa Bravo',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/user/login']]
-            ) : (
-                '<li class="dropdown">'
-                . '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'
-                . Yii::$app->user->identity->email
-                . '<span class="caret"></span>'
-                . '</a>'
-                . '<ul class="dropdown-menu">'
-                . '<li><a href="' . Url::to(['/menu-items/index']) . '">Platillos y Bebidas</a></li>'
-                . '<li><a href="/user/admin">Manage Users</a></li>'
-                . '<li><a href="' . Url::to(['/user/logout']) . '" data-method="post">Logout</a></li>'
-                . '<li>'
-                . '</ul>'
-            ),
-        ],
-    ]);
-    NavBar::end();
-    ?>
+    <div class="wrap">
+        <?php
+        NavBar::begin([
+            'brandLabel' => Yii::$app->name,
+            'brandUrl' => Yii::$app->homeUrl,
+            'options' => [
+                'class' => 'navbar-inverse navbar-fixed-top',
+            ],
+        ]);
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => [
+                ['label' => 'Inicio', 'url' => ['/site/index']],
+                (Yii::$app->user->isGuest) ? (['label' => 'Login', 'url' => ['/user/login']]) : ('<li class="dropdown">'
+                    . '<a class="dropdown-toggle" data-toggle="dropdown" href="#">'
+                    . Yii::$app->user->identity->username
+                    . '<span class="caret"></span>'
+                    . '</a>'
+                    . '<ul class="dropdown-menu">'
+                    . '<li><a href="' . Url::to(['/menu-items/index']) . '">Platillos y Bebidas</a></li>'
+                    . '<li><a href="' . Url::to(['/sales/index']) . '">Ordenes vendidas</a></li>'
+                    . '<li><a href="' . Url::to(['/user/admin']) . '">Administrar usuarios</a></li>'
+                    . '<li><a href="' . Url::to(['/user/logout']) . '" data-method="post">Salir</a></li>'
+                    . '<li>'
+                    . '</ul>'),
+            ],
+        ]);
+        NavBar::end();
+        ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
+        <div class="container">
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+            <?= $content ?>
+        </div>
     </div>
-</div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; Casa-Bravo <?= date('Y') ?></p>
+    <footer class="footer">
+        <div class="container">
+            <p class="pull-left">&copy; Casa Bravo <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+            <p class="pull-right"><?= Yii::powered() ?></p>
+        </div>
+    </footer>
 
-<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
 </body>
+
 </html>
 <?php $this->endPage() ?>
