@@ -1,13 +1,14 @@
 <?php
 
+use kartik\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Sales */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sales'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Orden') . ' ' . $model->order_folio;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Órdenes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -15,28 +16,58 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'user_id',
-            'order_folio',
-            'status',
-            'active',
-            'created_at',
-            'created_by',
-        ],
-    ]) ?>
-
+    <div class="row">
+        <div class="col-md-6">
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'customer.email',
+                    'order_folio',
+                    'status',
+                    'active:boolean',
+                    'created_at:datetime',
+                ],
+            ]) ?>
+        </div>
+        <div class="col-md-6">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'showPageSummary' => true,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    'menuItem.item_name',
+                    [
+                        'attribute' => 'menuItem.itemPhoto',
+                        'label' => 'Foto',
+                        'value' => function ($model) {
+                            return Html::img($model->menuItem->itemPhoto, [
+                                'width' => 100,
+                                'height' => 100
+                            ]);
+                        },
+                        'format' => 'html'
+                    ],
+                    'quantity',
+                    [
+                        'attribute' => 'menuItem.price',
+                        'label' => Yii::t('app', 'Precio'),
+                        'value' => function ($model) {
+                            return $model->menuItem->price;
+                        },
+                        'format' => ['decimal', 2],
+                        'pageSummary' => 'Total',
+                    ],
+                    [
+                        'attribute' => 'saleItemTotal',
+                        'label' => Yii::t('app', 'Total'),
+                        'value' => function ($model) {
+                            return $model->saleItemTotal;
+                        },
+                        'format' => ['decimal', 2],
+                        'pageSummary' => true
+                    ],
+                ],
+            ]); ?>
+        </div>
+    </div>
 </div>

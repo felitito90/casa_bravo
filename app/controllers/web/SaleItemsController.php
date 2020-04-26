@@ -5,6 +5,7 @@ namespace app\controllers\web;
 use app\models\helpers\ValueHelpers;
 use Yii;
 use app\models\SaleItems;
+use app\models\Sales;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -63,15 +64,32 @@ class SaleItemsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new SaleItems();
+        $transaction = Yii::$app->db->beginTransaction();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        try {
+            $model = new Sales();
+            $model->loadDefaultValues();
+            $model->user_id = Yii::$app->user->identity->id;
+            $model->order_folio = '#' . Yii::$app->security->generateRandomString(9);
+            $model->created_at = date('Y-m-d H:i:s');
+            $model->created_by = Yii::$app->user->identity->id;
+
+            if (!$model->save()) {
+                $transaction->rollBack();
+                throw new \Exception("Error Processing Request");
+            }
+
+            if (!(SaleItems::updateAll(['sale_id' => $model->id], 'sale_id = 0') > 1)) {
+                throw new \Exception("Error al procesar los platillos/bebidas");
+            }
+
+            $transaction->commit();
+
+            return $this->redirect(['/sales/view', 'id' => $model->id]);
+        } catch (\Throwable $th) {
+            $transaction->rollBack();
+            throw $th;
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**

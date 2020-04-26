@@ -60,6 +60,6 @@ class Sales extends \yii\db\ActiveRecord
      */
     public function getCustomer()
     {
-        return $this->hasOne(CustomersAuth::class, ['user_id' => 'id']);
+        return $this->hasOne(CustomersAuth::class, ['id' => 'user_id']);
     }
 }

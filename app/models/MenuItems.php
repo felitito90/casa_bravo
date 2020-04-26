@@ -164,7 +164,7 @@ class MenuItems extends \yii\db\ActiveRecord
      */
     public function getItemPhoto()
     {
-        return Yii::getAlias('@web') . '/img/menu_items/' . $this->item_photo;
+        return Yii::getAlias('@domainName') . '/img/menu_items/' . $this->item_photo;
     }
 
     /**

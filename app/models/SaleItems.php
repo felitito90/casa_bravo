@@ -59,4 +59,13 @@ class SaleItems extends \yii\db\ActiveRecord
     {
         return $this->hasOne(MenuItems::class, ['id' => 'menu_item_id']);
     }
+
+    /**
+     * [getSaleItemTotal description]
+     * @return  [type]  [return description]
+     */
+    public function getSaleItemTotal()
+    {
+        return ($this->menuItem->price * $this->quantity);
+    }
 }

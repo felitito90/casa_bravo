@@ -2,8 +2,10 @@
 
 namespace app\controllers\admin;
 
+use app\models\SaleItems;
 use Yii;
 use app\models\Sales;
+use app\models\search\SaleItemsSearch;
 use app\models\search\SalesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -21,7 +23,7 @@ class SalesController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -52,8 +54,14 @@ class SalesController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new SaleItemsSearch();
+        $searchModel->sale_id = $id;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
         ]);
     }
 
