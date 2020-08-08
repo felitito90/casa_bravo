@@ -224,7 +224,7 @@ if (preg_match('/dashboard/', $resetLink)) {
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:18px; font-weight:bold; line-height:18px; color:#30373b;">
-                                            <?= Yii::t('app', '¡Hola') . ' ' . $user->customer->first_name . '!' ?>
+                                            <?= Yii::t('app', '¡Hola') . '!' ?>
                                         </td>
                                     </tr>
                                     <tr>

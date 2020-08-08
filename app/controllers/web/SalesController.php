@@ -21,7 +21,7 @@ class SalesController extends \yii\web\Controller
         ]);
     }
 
-    public function actionView($id)
+    public function actionView(int $id)
     {
         $model = $this->findModel($id);
 
@@ -35,7 +35,7 @@ class SalesController extends \yii\web\Controller
      * @param   [type]  $id  [$id description]
      * @return  [type]       [return description]
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (!is_null($model = Sales::findOne($id))) {
             return $model;

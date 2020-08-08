@@ -22,7 +22,7 @@ class SaleItemsController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                 ],
             ],
@@ -36,7 +36,8 @@ class SaleItemsController extends Controller
     public function actionIndex()
     {
         $saleItems = SaleItems::find()->where([
-            'customer_auth_id' => Yii::$app->user->identity->id
+            'customer_auth_id' => Yii::$app->user->identity->id,
+            'sale_id' => 0
         ])->all();
 
         return $this->render('index', [
@@ -50,7 +51,7 @@ class SaleItemsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView(int $id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -79,7 +80,9 @@ class SaleItemsController extends Controller
                 throw new \Exception("Error Processing Request");
             }
 
-            if (!(SaleItems::updateAll(['sale_id' => $model->id], 'sale_id = 0') > 1)) {
+            if (!(SaleItems::updateAll([
+                'sale_id' => $model->id
+            ], 'sale_id = 0 AND customer_auth_id = ' . Yii::$app->user->identity->id))) {
                 throw new \Exception("Error al procesar los platillos/bebidas");
             }
 
@@ -99,7 +102,7 @@ class SaleItemsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
 
@@ -118,7 +121,7 @@ class SaleItemsController extends Controller
      * @param int $quantity
      * @return object
      */
-    public function actionUpdateQuantity($id, $quantity)
+    public function actionUpdateQuantity(int $id, int $quantity)
     {
         $model = $this->findModel($id);
 
@@ -141,7 +144,7 @@ class SaleItemsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
         if (!$this->findModel($id)->delete()) {
             return json_encode(['error' => false]);
@@ -160,7 +163,7 @@ class SaleItemsController extends Controller
      * @return SaleItems the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (!is_null($model = SaleItems::findOne($id))) {
             return $model;

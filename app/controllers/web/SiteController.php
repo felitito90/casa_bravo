@@ -234,10 +234,10 @@ class SiteController extends Controller
 
     /**
      * [onAuthSuccess description]
-     * @param   [type]  $client  [$client description]
-     * @return  [type]           [return description]
+     * @return  void
      */
-    public function onAuthSuccess($client) {
+    public function onAuthSuccess($client): void
+    {
         (new AuthHandler($client))->handle();
     }
 
@@ -273,7 +273,6 @@ class SiteController extends Controller
 
     /**
      * Logout action.
-     *
      * @return string
      */
     public function actionLogout()
@@ -285,7 +284,6 @@ class SiteController extends Controller
     
     /**
      * Displays about page.
-     *
      * @return string
      */
     public function actionAbout()
